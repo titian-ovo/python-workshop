@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grad)"/>
+  <text x="50%" y="35%" text-anchor="middle" font-size="180" font-weight="700" fill="#1F2937" font-family="Arial, sans-serif">🐍</text>
+  <text x="50%" y="55%" text-anchor="middle" font-size="56" font-weight="700" fill="#1F2937" font-family="Arial, sans-serif">淳の Python 学习工坊</text>
+  <text x="50%" y="65%" text-anchor="middle" font-size="32" fill="#374151" font-family="Arial, sans-serif">30 个核心知识点 · 从零基础到进阶</text>
+</svg>
