@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python 零基础学习工坊</title>
+
+  <!-- SEO 基础 -->
+  <meta name="description" content="从变量、循环到面向对象、异步编程，30 个精心设计的知识点带你循序渐进掌握 Python。每个知识点都配有实例讲解和测试题目，边学边练，巩固记忆。">
+  <meta name="keywords" content="Python，编程，学习，教程，零基础，入门，知识点">
+  <meta name="author" content="Python 学习工坊">
+  <meta name="language" content="zh-CN">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://python-workshop.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Python 零基础学习工坊">
+  <meta property="og:description" content="30 个核心知识点，从零基础到进阶，系统掌握 Python">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://python-workshop.vercel.app/">
+  <meta property="og:image" content="https://python-workshop.vercel.app/icon-512.png">
+  <meta property="og:site_name" content="Python 零基础学习工坊">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Python 零基础学习工坊">
+  <meta name="twitter:description" content="30 个核心知识点，从零基础到进阶，系统掌握 Python">
+  <meta name="twitter:image" content="https://python-workshop.vercel.app/icon-512.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Python 学习">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="css/minimal.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html">索引</a>
+        <a href="progress.html">进度</a>
+        <a href="install.html">📥 安装教程</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-subtitle" id="hero-subtitle"></p>
+        <div class="hero-cta">
+          <a href="learn.html" class="btn btn-primary" id="cta-primary"></a>
+          <a href="flashcard.html" class="btn btn-secondary" id="cta-secondary"></a>
+        </div>
+      </div>
+      
+      <!-- 动画演示区 -->
+      <div class="hero-animation" id="hero-animation">
+        <div class="code-preview">
+          <div class="code-line"><span class="code-keyword">print</span>(<span class="code-string">"Hello, Python!"</span>)</div>
+          <div class="code-line"><span class="code-keyword">def</span> <span class="code-function">greet</span>(name):</div>
+          <div class="code-line code-indent"><span class="code-keyword">return</span> <span class="code-string">f"Hello, {name}!"</span></div>
+          <div class="code-line"></div>
+          <div class="code-line"><span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">3</span>):</div>
+          <div class="code-line code-indent"><span class="code-function">print</span>(<span class="code-function">greet</span>(<span class="code-string">"Learner"</span>))</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 统计卡片 -->
+    <section class="stats-section">
+      <div class="stats-container" id="stats-container"></div>
+    </section>
+
+    <!-- 学习路径 -->
+    <section class="learning-path">
+      <h2 class="section-title">学习路径</h2>
+      <div class="path-grid">
+        <div class="path-card">
+          <div class="path-icon">📚</div>
+          <h3>基础篇</h3>
+          <p>变量、数据类型、条件循环、函数等基础知识</p>
+          <span class="path-count">15 个知识点</span>
+        </div>
+        <div class="path-card">
+          <div class="path-icon">🚀</div>
+          <h3>进阶篇</h3>
+          <p>面向对象、装饰器、生成器、异步编程等高级特性</p>
+          <span class="path-count">15 个知识点</span>
+        </div>
+        <div class="path-card">
+          <div class="path-icon">💻</div>
+          <h3>实践作业</h3>
+          <p>每个知识点都有实例和测试，边学边练</p>
+          <span class="path-count">90+ 案例</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 特色功能 -->
+    <section class="features">
+      <h2 class="section-title">学习特色</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <h4>循序渐进</h4>
+          <p>从零基础到进阶，科学的学习路径设计</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📝</div>
+          <h4>实例驱动</h4>
+          <p>每个知识点都有多个实际案例</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✅</div>
+          <h4>即时测试</h4>
+          <p>学完立即测试，巩固记忆</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <h4>进度追踪</h4>
+          <p>记录学习进度，见证成长</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <h3 id="footer-tagline"></h3>
+        <p id="footer-description"></p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/siteConfig.js"></script>
+  <script src="js/wordData.js"></script>
+  <script>
+    // 初始化首页内容
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hero 区
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle && siteConfig.hero.title) {
+        heroTitle.innerHTML = siteConfig.hero.title.map(line => `<span class="title-line">${line}</span>`).join('');
+      }
+      
+      const heroSubtitle = document.getElementById('hero-subtitle');
+      if (heroSubtitle) heroSubtitle.textContent = siteConfig.hero.subtitle;
+      
+      const ctaPrimary = document.getElementById('cta-primary');
+      if (ctaPrimary) ctaPrimary.textContent = siteConfig.cta.primary;
+      
+      const ctaSecondary = document.getElementById('cta-secondary');
+      if (ctaSecondary) ctaSecondary.textContent = siteConfig.cta.secondary;
+      
+      // 统计卡片
+      const statsContainer = document.getElementById('stats-container');
+      if (statsContainer && siteConfig.stats) {
+        statsContainer.innerHTML = siteConfig.stats.map(stat => `
+          <div class="stat-card">
+            <div class="stat-value">${stat.value}</div>
+            <div class="stat-label">${stat.label}</div>
+          </div>
+        `).join('');
+      }
+      
+      // Footer
+      const footerTagline = document.getElementById('footer-tagline');
+      if (footerTagline) footerTagline.textContent = siteConfig.footer.tagline;
+      
+      const footerDescription = document.getElementById('footer-description');
+      if (footerDescription) footerDescription.textContent = siteConfig.footer.description;
+      
+      // 动画演示 - 动态加载知识点
+      const animationContainer = document.getElementById('hero-animation');
+      if (animationContainer && WordRoots && WordRoots.length > 0) {
+        const demoCount = Math.min(siteConfig.hero.animation.demoCount || 5, WordRoots.length);
+        let codeLines = [];
+        
+        for (let i = 0; i < demoCount; i++) {
+          const item = WordRoots[i];
+          codeLines.push(`<div class="anim-item" data-id="${item.id}">`);
+          codeLines.push(`  <div class="anim-term">${item.root}</div>`);
+          codeLines.push(`  <div class="anim-meaning">${item.meaning}</div>`);
+          codeLines.push(`</div>`);
+        }
+        
+        animationContainer.innerHTML = `<div class="anim-container">${codeLines.join('')}</div>`;
+      }
+    });
+  </script>
+</body>
+</html>

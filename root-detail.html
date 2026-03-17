@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识点详情 - Python 零基础学习工坊</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/minimal.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html">索引</a>
+        <a href="progress.html">进度</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="detail-container">
+      <button class="btn-back" onclick="history.back()">← 返回</button>
+      
+      <article class="detail-card" id="detail-card">
+        <div class="detail-header">
+          <span class="detail-origin" id="detail-origin"></span>
+          <span class="detail-id" id="detail-id"></span>
+        </div>
+        
+        <h1 class="detail-title" id="detail-title"></h1>
+        <div class="detail-meaning" id="detail-meaning"></div>
+        <div class="detail-description" id="detail-description"></div>
+        
+        <section class="detail-section">
+          <h2>💡 实例</h2>
+          <div class="examples-detail" id="examples-detail"></div>
+        </section>
+        
+        <section class="detail-section">
+          <h2>📝 小测试</h2>
+          <div class="quiz-detail" id="quiz-detail"></div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script src="js/wordData.js"></script>
+  <script>
+    function loadDetail() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      const item = WordRoots.find(i => i.id === id);
+      
+      if (!item) {
+        document.getElementById('detail-card').innerHTML = '<p>知识点未找到</p>';
+        return;
+      }
+      
+      document.title = item.root + ' - Python 学习工坊';
+      document.getElementById('detail-origin').textContent = item.origin;
+      document.getElementById('detail-id').textContent = '#' + item.id;
+      document.getElementById('detail-title').textContent = item.root;
+      document.getElementById('detail-meaning').textContent = item.meaning;
+      document.getElementById('detail-description').textContent = item.description;
+      
+      document.getElementById('examples-detail').innerHTML = item.examples.map(ex => `
+        <div class="example-detail">
+          <div class="example-title"><strong>${ex.word}</strong></div>
+          <div class="example-meaning">${ex.meaning}</div>
+          <div class="example-explanation">${ex.explanation}</div>
+        </div>
+      `).join('');
+      
+      if (item.quiz) {
+        document.getElementById('quiz-detail').innerHTML = `
+          <div class="quiz-question">${item.quiz.question}</div>
+          <div class="quiz-options">
+            ${item.quiz.options.map((opt, i) => `<button class="quiz-option" onclick="checkAnswer(this, ${i}, ${item.quiz.correctAnswer})">${opt}</button>`).join('')}
+          </div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+        `;
+      }
+    }
+
+    function checkAnswer(btn, selected, correct) {
+      const feedback = document.getElementById('quiz-feedback');
+      const options = document.querySelectorAll('.quiz-option');
+      options.forEach((opt, i) => {
+        opt.disabled = true;
+        if (i === correct) opt.classList.add('correct');
+        else if (i === selected) opt.classList.add('incorrect');
+      });
+      feedback.textContent = selected === correct ? '✅ 回答正确！' : '❌ 正确答案已标绿';
+      feedback.className = 'quiz-feedback ' + (selected === correct ? 'correct' : 'incorrect');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDetail);
+  </script>
+</body>
+</html>

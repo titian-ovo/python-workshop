@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>索引 - Python 零基础学习工坊</title>
+  <meta name="description" content="浏览所有 Python 知识点">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/minimal.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html" class="active">索引</a>
+        <a href="progress.html">进度</a>
+        <a href="install.html">📥 安装教程</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="roots-container">
+      <h1 class="page-title">知识点索引</h1>
+      
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="🔍 搜索知识点..." oninput="filterRoots()">
+        <select id="filter-origin" onchange="filterRoots()">
+          <option value="">全部</option>
+          <option value="基础篇">基础篇</option>
+          <option value="进阶篇">进阶篇</option>
+        </select>
+      </div>
+
+      <div class="roots-grid" id="roots-grid"></div>
+    </div>
+  </main>
+
+  <script src="js/wordData.js"></script>
+  <script>
+    function filterRoots() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const origin = document.getElementById('filter-origin').value;
+      const grid = document.getElementById('roots-grid');
+      
+      const filtered = WordRoots.filter(item => {
+        const matchSearch = item.root.toLowerCase().includes(search) || item.meaning.toLowerCase().includes(search);
+        const matchOrigin = !origin || item.origin === origin;
+        return matchSearch && matchOrigin;
+      });
+      
+      grid.innerHTML = filtered.map(item => `
+        <a href="root-detail.html?id=${item.id}" class="root-card">
+          <div class="root-header">
+            <span class="root-origin">${item.origin}</span>
+            <span class="root-id">#${item.id}</span>
+          </div>
+          <h3 class="root-title">${item.root}</h3>
+          <p class="root-meaning">${item.meaning}</p>
+        </a>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', filterRoots);
+  </script>
+</body>
+</html>

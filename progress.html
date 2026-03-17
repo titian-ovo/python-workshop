@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>进度 - Python 零基础学习工坊</title>
+  <meta name="description" content="查看你的学习进度">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/minimal.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html">索引</a>
+        <a href="progress.html" class="active">进度</a>
+        <a href="install.html">📥 安装教程</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="progress-container">
+      <h1 class="page-title">学习进度</h1>
+      
+      <div class="stats-overview">
+        <div class="stat-box">
+          <div class="stat-number" id="total-learned">0</div>
+          <div class="stat-label">已学习</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" id="total-mastered">0</div>
+          <div class="stat-label">已掌握</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" id="progress-percent">0%</div>
+          <div class="stat-label">完成率</div>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <h2>📚 基础篇</h2>
+        <div class="mastery-list" id="basic-list"></div>
+      </div>
+
+      <div class="progress-section">
+        <h2>🚀 进阶篇</h2>
+        <div class="mastery-list" id="advanced-list"></div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="resetProgress()" style="margin-top: 2rem;">⚠️ 重置进度</button>
+    </div>
+  </main>
+
+  <script src="js/wordData.js"></script>
+  <script src="js/storage.js"></script>
+  <script>
+    function renderProgress() {
+      const progress = ProgressStorage.getProgress();
+      const mastered = ProgressStorage.getMastered();
+      
+      document.getElementById('total-learned').textContent = progress.current + 1;
+      document.getElementById('total-mastered').textContent = mastered.length;
+      document.getElementById('progress-percent').textContent = Math.round((progress.current + 1) / WordRoots.length * 100) + '%';
+      
+      const basicList = document.getElementById('basic-list');
+      const advancedList = document.getElementById('advanced-list');
+      
+      const basic = WordRoots.filter(i => i.origin === '基础篇');
+      const advanced = WordRoots.filter(i => i.origin === '进阶篇');
+      
+      basicList.innerHTML = basic.map(i => `
+        <div class="mastery-item ${mastered.includes(i.id) ? 'mastered' : ''}">
+          <span class="mastery-status">${mastered.includes(i.id) ? '✓' : '○'}</span>
+          <span class="mastery-name">${i.root}</span>
+        </div>
+      `).join('');
+      
+      advancedList.innerHTML = advanced.map(i => `
+        <div class="mastery-item ${mastered.includes(i.id) ? 'mastered' : ''}">
+          <span class="mastery-status">${mastered.includes(i.id) ? '✓' : '○'}</span>
+          <span class="mastery-name">${i.root}</span>
+        </div>
+      `).join('');
+    }
+
+    function resetProgress() {
+      if (confirm('确定要重置所有学习进度吗？')) {
+        localStorage.removeItem('pythonLearningProgress');
+        localStorage.removeItem('pythonMasteredItems');
+        renderProgress();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderProgress);
+  </script>
+</body>
+</html>

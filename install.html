@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>安装 Python - Python 零基础学习工坊</title>
+  <meta name="description" content="新手必看！超详细的 Python 安装教程，从零开始配置编程环境">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/minimal.css">
+  <style>
+    .install-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .install-card { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .step-number { display: inline-block; width: 40px; height: 40px; background: #FBBF24; border-radius: 50%; text-align: center; line-height: 40px; font-weight: 700; margin-right: 1rem; }
+    .step-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; }
+    .tip-box { background: #FEF3C7; border-left: 4px solid #FBBF24; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    .warning-box { background: #FEE2E2; border-left: 4px solid #EF4444; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    .download-btn { display: inline-block; background: #10B981; color: white; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; margin: 1rem 0; }
+    .download-btn:hover { background: #059669; }
+    .code-block { background: #1F2937; color: #F3F4F6; padding: 1rem; border-radius: 8px; font-family: 'Courier New', monospace; margin: 1rem 0; }
+    .check-list { list-style: none; }
+    .check-list li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .check-list li:before { content: '✓'; position: absolute; left: 0; color: #10B981; font-weight: 700; }
+    .os-tabs { display: flex; gap: 1rem; margin-bottom: 1rem; }
+    .os-tab { padding: 0.5rem 1rem; border: 2px solid #E5E7EB; border-radius: 8px; cursor: pointer; }
+    .os-tab.active { border-color: #FBBF24; background: #FEF3C7; }
+    .os-content { display: none; }
+    .os-content.active { display: block; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html">索引</a>
+        <a href="progress.html">进度</a>
+        <a href="install.html" class="active">安装教程</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="install-container">
+      <h1 class="page-title">🐍 Python 安装教程</h1>
+      <p class="page-subtitle">新手必看！5 分钟完成 Python 环境配置</p>
+
+      <!-- 步骤 1：下载 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">1</span>
+          下载 Python 安装包
+        </div>
+        
+        <p>访问 Python 官网下载最新版本：</p>
+        
+        <a href="https://www.python.org/downloads/" target="_blank" class="download-btn">
+          📥 前往 Python 官网下载
+        </a>
+        
+        <div class="tip-box">
+          <strong>💡 提示：</strong>官网会自动识别你的操作系统，推荐下载最新的 Python 3.x 版本（目前最新是 3.12+）
+        </div>
+
+        <div class="os-tabs">
+          <div class="os-tab active" onclick="switchOS('windows')">Windows</div>
+          <div class="os-tab" onclick="switchOS('mac')">macOS</div>
+          <div class="os-tab" onclick="switchOS('linux')">Linux</div>
+        </div>
+
+        <div id="windows" class="os-content active">
+          <h3>🪟 Windows 系统</h3>
+          <ol>
+            <li>点击下载 "Python 3.12.x Windows installer (64-bit)"</li>
+            <li>等待下载完成（约 20-30MB）</li>
+            <li>双击下载的安装文件（如 <code>python-3.12.5-amd64.exe</code>）</li>
+          </ol>
+        </div>
+
+        <div id="mac" class="os-content">
+          <h3>🍎 macOS 系统</h3>
+          <ol>
+            <li>点击下载 "macOS 64-bit universal2 installer"</li>
+            <li>等待下载完成（约 30MB）</li>
+            <li>双击下载的 <code>.pkg</code> 文件</li>
+          </ol>
+        </div>
+
+        <div id="linux" class="os-content">
+          <h3>🐧 Linux 系统</h3>
+          <p>大多数 Linux 系统已预装 Python，使用包管理器安装：</p>
+          <div class="code-block">
+# Ubuntu/Debian
+sudo apt update
+sudo apt install python3 python3-pip
+
+# CentOS/RHEL
+sudo yum install python3 python3-pip
+
+# Arch Linux
+sudo pacman -S python python-pip
+          </div>
+        </div>
+      </div>
+
+      <!-- 步骤 2：安装 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">2</span>
+          安装 Python（Windows 重点！）
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ 重要：</strong>Windows 用户安装时必须勾选 "Add Python to PATH"！
+        </div>
+
+        <h3>Windows 安装步骤：</h3>
+        <ol>
+          <li>运行安装程序后，<strong>第一步就会看到 "Add python.exe to PATH" 选项</strong></li>
+          <li><strong>✅ 务必勾选这个选项！</strong>（这是最关键的一步）</li>
+          <li>点击 "Install Now"</li>
+          <li>等待安装完成（约 2-3 分钟）</li>
+          <li>看到 "Setup was successful" 点击 "Close"</li>
+        </ol>
+
+        <div class="tip-box">
+          <strong>💡 为什么一定要勾选 "Add Python to PATH"？</strong><br>
+          这样你可以在任何地方（命令提示符、PowerShell、VS Code 等）直接使用 <code>python</code> 命令，不需要输入完整路径。
+        </div>
+
+        <h3>macOS 安装步骤：</h3>
+        <ol>
+          <li>双击 <code>.pkg</code> 文件</li>
+          <li>点击 "继续" → "继续"</li>
+          <li>同意许可协议</li>
+          <li>选择安装位置（默认即可）</li>
+          <li>点击 "安装"，输入密码确认</li>
+          <li>等待安装完成</li>
+        </ol>
+      </div>
+
+      <!-- 步骤 3：验证 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">3</span>
+          验证安装是否成功
+        </div>
+
+        <h3>Windows 验证：</h3>
+        <ol>
+          <li>按 <code>Win + R</code> 打开运行窗口</li>
+          <li>输入 <code>cmd</code> 回车，打开命令提示符</li>
+          <li>输入以下命令：</li>
+        </ol>
+        <div class="code-block">
+python --version
+        </div>
+        <p>如果显示 <code>Python 3.12.x</code>（或类似版本号），说明安装成功！✅</p>
+
+        <h3>macOS/Linux 验证：</h3>
+        <ol>
+          <li>打开 "终端"（macOS）或终端（Linux）</li>
+          <li>输入：</li>
+        </ol>
+        <div class="code-block">
+python3 --version
+        </div>
+        <p>显示版本号即成功！✅</p>
+
+        <div class="tip-box">
+          <strong>💡 测试运行 Python：</strong>
+          <div class="code-block">
+# 输入 python (Windows) 或 python3 (Mac/Linux) 进入交互模式
+>>> print("Hello, Python!")
+Hello, Python!
+>>> exit()  # 退出
+          </div>
+        </div>
+      </div>
+
+      <!-- 步骤 4：安装编辑器 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">4</span>
+          安装代码编辑器（推荐 VS Code）
+        </div>
+
+        <p>写代码需要一个好用的编辑器，强烈推荐 <strong>Visual Studio Code</strong>（免费、强大、易用）</p>
+
+        <a href="https://code.visualstudio.com/" target="_blank" class="download-btn">
+          📥 下载 VS Code
+        </a>
+
+        <h3>VS Code 安装步骤：</h3>
+        <ol>
+          <li>访问官网下载安装包</li>
+          <li>运行安装程序，一路 "下一步" 即可</li>
+          <li>安装完成后打开 VS Code</li>
+          <li>安装 Python 扩展：
+            <ul>
+              <li>点击左侧 "扩展" 图标（或按 <code>Ctrl+Shift+X</code>）</li>
+              <li>搜索 "Python"</li>
+              <li>找到 Microsoft 出品的 "Python" 扩展</li>
+              <li>点击 "安装"</li>
+            </ul>
+          </li>
+        </ol>
+
+        <div class="tip-box">
+          <strong>💡 其他编辑器选择：</strong>
+          <ul style="margin-top: 0.5rem;">
+            <li><strong>PyCharm Community</strong> - 功能强大的专业 Python IDE（免费）</li>
+            <li><strong>Sublime Text</strong> - 轻量快速</li>
+            <li><strong>Notepad++</strong> - 简单够用</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 步骤 5：第一个程序 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">5</span>
+          运行你的第一个 Python 程序
+        </div>
+
+        <h3>方法 1：交互模式（最简单）</h3>
+        <ol>
+          <li>打开命令提示符（Windows）或终端（Mac/Linux）</li>
+          <li>输入 <code>python</code>（Mac/Linux 用 <code>python3</code>）回车</li>
+          <li>看到 <code>>>></code> 提示符后，输入：</li>
+        </ol>
+        <div class="code-block">
+>>> print("Hello, World!")
+Hello, World!
+>>> exit()
+        </div>
+
+        <h3>方法 2：运行脚本文件</h3>
+        <ol>
+          <li>在桌面新建一个文本文件，命名为 <code>hello.py</code></li>
+          <li>用记事本或 VS Code 打开，输入：</li>
+        </ol>
+        <div class="code-block">
+print("Hello, World!")
+print("我的第一个 Python 程序！")
+        </div>
+        <ol start="3">
+          <li>保存文件</li>
+          <li>打开命令提示符，进入桌面：</li>
+        </ol>
+        <div class="code-block">
+cd Desktop
+        </div>
+        <ol start="4">
+          <li>运行程序：</li>
+        </ol>
+        <div class="code-block">
+python hello.py
+        </div>
+        <p>看到输出就成功了！🎉</p>
+      </div>
+
+      <!-- 常见问题 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">❓</span>
+          常见问题解答
+        </div>
+
+        <h3>Q1: 输入 <code>python</code> 提示 "不是内部或外部命令"？</h3>
+        <div class="warning-box">
+          <strong>原因：</strong>安装时没有勾选 "Add Python to PATH"<br><br>
+          <strong>解决方法：</strong>
+          <ol>
+            <li>重新运行 Python 安装程序</li>
+            <li>选择 "Modify"</li>
+            <li>确保勾选 "Add Python to environment variables"</li>
+            <li>完成安装</li>
+          </ol>
+        </div>
+
+        <h3>Q2: Windows 商店的 Python 能用吗？</h3>
+        <p>可以用，但<strong>不推荐</strong>。建议从官网下载，版本更新、功能更全。</p>
+
+        <h3>Q3: 应该学 Python 2 还是 Python 3？</h3>
+        <p><strong>绝对学 Python 3！</strong> Python 2 已在 2020 年停止支持，所有新项目都用 Python 3。</p>
+
+        <h3>Q4: 需要安装 Anaconda 吗？</h3>
+        <p>初学者<strong>不需要</strong>。Anaconda 适合数据科学，但体积大（3GB+）。先用官方 Python，以后需要再装。</p>
+
+        <h3>Q5: 安装后找不到图标？</h3>
+        <p>Python 没有桌面图标，它是命令行工具。用 VS Code 写代码，或在命令行输入 <code>python</code> 运行。</p>
+      </div>
+
+      <!-- 检查清单 -->
+      <div class="install-card">
+        <div class="step-title">
+          <span class="step-number">✅</span>
+          安装完成检查清单
+        </div>
+
+        <ul class="check-list">
+          <li>Python 3.x 已安装（运行 <code>python --version</code> 能看到版本号）</li>
+          <li>可以在命令行直接运行 <code>python</code> 命令</li>
+          <li>VS Code 或其他编辑器已安装</li>
+          <li>成功运行了 "Hello, World!" 程序</li>
+          <li>准备好开始学习 Python 基础知识！</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="learn.html" class="download-btn" style="font-size: 1.2rem;">
+            🚀 开始学习 Python →
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function switchOS(os) {
+      // 切换标签样式
+      document.querySelectorAll('.os-tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // 切换内容显示
+      document.querySelectorAll('.os-content').forEach(content => content.classList.remove('active'));
+      document.getElementById(os).classList.add('active');
+    }
+  </script>
+</body>
+</html>

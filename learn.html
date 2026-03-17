@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习 - Python 零基础学习工坊</title>
+
+  <!-- SEO -->
+  <meta name="description" content="渐进式学习 Python 知识点，从基础到进阶">
+  <meta name="keywords" content="Python，学习，教程">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#FBBF24">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="css/minimal.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">🐍 Python 学习工坊</a>
+      <div class="nav-links">
+        <a href="learn.html" class="active">学习</a>
+        <a href="flashcard.html">闪卡</a>
+        <a href="roots.html">索引</a>
+        <a href="progress.html">进度</a>
+        <a href="install.html">📥 安装教程</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="learn-page">
+    <div class="learn-container">
+      <div class="learn-header">
+        <button class="btn-back" onclick="history.back()">← 返回</button>
+        <div class="learn-progress">
+          <span id="current-index">1</span> / <span id="total-count">30</span>
+        </div>
+        <button class="btn-next" onclick="nextCard()">下一个 →</button>
+      </div>
+
+      <div class="learn-card" id="learn-card">
+        <div class="card-header">
+          <span class="card-origin" id="card-origin">基础篇</span>
+          <span class="card-id" id="card-id">#1</span>
+        </div>
+        
+        <h2 class="card-title" id="card-title">加载中...</h2>
+        
+        <div class="card-meaning" id="card-meaning"></div>
+        
+        <div class="card-description" id="card-description"></div>
+        
+        <div class="card-examples">
+          <h3>💡 实例</h3>
+          <div class="examples-list" id="examples-list"></div>
+        </div>
+        
+        <div class="card-quiz">
+          <h3>📝 小测试</h3>
+          <div class="quiz-question" id="quiz-question"></div>
+          <div class="quiz-options" id="quiz-options"></div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+        </div>
+      </div>
+
+      <div class="learn-navigation">
+        <button class="btn-nav" onclick="prevCard()">← 上一个</button>
+        <button class="btn-mark" onclick="toggleMastered()">✓ 标记为已掌握</button>
+        <button class="btn-nav" onclick="nextCard()">下一个 →</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/siteConfig.js"></script>
+  <script src="js/wordData.js"></script>
+  <script src="js/storage.js"></script>
+  <script>
+    let currentIndex = 0;
+
+    function renderCard(index) {
+      if (!WordRoots || index < 0 || index >= WordRoots.length) return;
+      
+      const item = WordRoots[index];
+      
+      document.getElementById('current-index').textContent = index + 1;
+      document.getElementById('total-count').textContent = WordRoots.length;
+      document.getElementById('card-origin').textContent = item.origin;
+      document.getElementById('card-id').textContent = '#' + item.id;
+      document.getElementById('card-title').textContent = item.root;
+      document.getElementById('card-meaning').textContent = item.meaning;
+      document.getElementById('card-description').textContent = item.description;
+      
+      // 实例
+      const examplesList = document.getElementById('examples-list');
+      if (examplesList && item.examples) {
+        examplesList.innerHTML = item.examples.map(ex => `
+          <div class="example-item">
+            <div class="example-word"><strong>${ex.word}</strong>: ${ex.meaning}</div>
+            <div class="example-explanation">${ex.explanation}</div>
+          </div>
+        `).join('');
+      }
+      
+      // 测试题
+      const quizQuestion = document.getElementById('quiz-question');
+      const quizOptions = document.getElementById('quiz-options');
+      const quizFeedback = document.getElementById('quiz-feedback');
+      
+      if (quizQuestion && quizOptions && item.quiz) {
+        quizQuestion.textContent = item.quiz.question;
+        quizOptions.innerHTML = item.quiz.options.map((opt, i) => `
+          <button class="quiz-option" onclick="checkAnswer(${i}, ${item.quiz.correctAnswer})">${opt}</button>
+        `).join('');
+        quizFeedback.textContent = '';
+        quizFeedback.className = 'quiz-feedback';
+      }
+      
+      // 更新标记状态
+      const markBtn = document.querySelector('.btn-mark');
+      if (markBtn && ProgressStorage.isMastered(item.id)) {
+        markBtn.textContent = '✓ 已掌握';
+        markBtn.classList.add('mastered');
+      } else if (markBtn) {
+        markBtn.textContent = '✓ 标记为已掌握';
+        markBtn.classList.remove('mastered');
+      }
+      
+      // 滚动到顶部
+      window.scrollTo(0, 0);
+    }
+
+    function nextCard() {
+      if (currentIndex < WordRoots.length - 1) {
+        currentIndex++;
+        renderCard(currentIndex);
+        ProgressStorage.setProgress(currentIndex);
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderCard(currentIndex);
+      }
+    }
+
+    function checkAnswer(selected, correct) {
+      const feedback = document.getElementById('quiz-feedback');
+      const options = document.querySelectorAll('.quiz-option');
+      
+      options.forEach((opt, i) => {
+        opt.disabled = true;
+        if (i === correct) opt.classList.add('correct');
+        else if (i === selected && selected !== correct) opt.classList.add('incorrect');
+      });
+      
+      if (selected === correct) {
+        feedback.textContent = '✅ 回答正确！';
+        feedback.classList.add('correct');
+      } else {
+        feedback.textContent = '❌ 不对哦，正确答案已标绿';
+        feedback.classList.add('incorrect');
+      }
+    }
+
+    function toggleMastered() {
+      const item = WordRoots[currentIndex];
+      const markBtn = document.querySelector('.btn-mark');
+      
+      if (ProgressStorage.isMastered(item.id)) {
+        ProgressStorage.unmarkMastered(item.id);
+        markBtn.textContent = '✓ 标记为已掌握';
+        markBtn.classList.remove('mastered');
+      } else {
+        ProgressStorage.markMastered(item.id);
+        markBtn.textContent = '✓ 已掌握';
+        markBtn.classList.add('mastered');
+      }
+    }
+
+    // 初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      const saved = ProgressStorage.getProgress();
+      if (saved && saved.current < WordRoots.length) {
+        currentIndex = saved.current;
+      }
+      renderCard(currentIndex);
+    });
+
+    // 键盘导航
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') nextCard();
+      else if (e.key === 'ArrowLeft') prevCard();
+    });
+  </script>
+</body>
+</html>
